@@ -9,11 +9,22 @@ import SwiftUI
 
 struct ContentView: View {
     
-    var emojis = ["🚲","🚂","🚁","🚜","🚕","🏎","🚑","🚓","🚒","✈️","🚀","⛵️","🛸","🛶","🚌","🏍","🛺","🚠","🛵","🚗","🚚","🚇","🛻","🚝"]
-    @State var emojiCount =  20
+    private var vehicles = ["🚲","🚂","🚁","🚜","🚕","🏎","🚑","🚓","🚒","✈️","🚀","⛵️","🛸","🛶","🚌","🏍","🛺","🚠","🛵","🚗","🚚","🚇","🛻","🚝"]
+    
+    private var animals = ["🦍","🐘","🦏","🐫","🦒","🦘","🐅","🦓","🐈","🦚","🦜","🐿️","🦖","🦅","🐊","🦀","🐄","🐖","🐇","🦥","🐝","🐒"]
+    
+    private var food = ["🍎","🍐","🍊","🍋","🍌","🍉","🍇","🍓","🫐","🍒","🍑","🥭","🍍","🥥","🥝","🍅","🍆","🥑","🥦","🌶️","🌽","🥕","🧄","🥔","🧅"]
+    
+    @State var emojis = ["🚲","🚂","🚁","🚜","🚕","🏎","🚑","🚓","🚒","✈️","🚀","⛵️","🛸","🛶","🚌","🏍","🛺","🚠","🛵","🚗","🚚","🚇","🛻","🚝"]
+    
+    @State var emojiCount = 24
     
     var body: some View {
         VStack {
+            Text("Memorize!")
+                .font(.title)
+                .bold()
+                .foregroundColor(.red)
             ScrollView {
                 LazyVGrid(columns: [GridItem(.adaptive(minimum: 65))]) {
                     ForEach(emojis[0..<emojiCount], id: \.self) { emoji in
@@ -23,9 +34,54 @@ struct ContentView: View {
                 }
             }
             .foregroundColor(.red)
+            
+            HStack {
+                
+                Button {
+                    emojis = vehicles.shuffled()
+                    emojiCount = emojis.count
+                } label: {
+                    VStack {
+                        Image(systemName: "car.fill")
+                            .font(.largeTitle)
+                        Text("Vehicles")
+                            .font(.footnote)
+                    }
+                }
+                
+                Spacer()
+                
+                Button {
+                    emojis = animals
+                    emojiCount = emojis.count
+                } label: {
+                    VStack {
+                        Image(systemName: "pawprint.fill")
+                            .font(.largeTitle)
+                        Text("Animals")
+                            .font(.footnote)
+                    }
+                }
+                
+                Spacer()
+        
+                Button {
+                    emojis = food.shuffled()
+                    emojiCount = emojis.count
+                } label: {
+                    VStack {
+                        Image(systemName: "carrot.fill")
+                            .font(.largeTitle)
+                        Text("Food")
+                            .font(.footnote)
+                    }
+                }
+            }
+            .padding(.horizontal)
         }
         .padding(.horizontal)
     }
+    
     
 }
 
